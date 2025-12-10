@@ -1,0 +1,36 @@
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+  body,html {margin:0;height:100vh;background:#000}
+  button {width:100%;height:100%;border:none;background:none}
+</style>
+</head>
+<body>
+
+<button></button>
+
+<audio id="a" src="snapchat_notification.mp3"></audio>
+
+<script>
+  const a = document.getElementById('a');
+
+  // Erstes Tippen schaltet Ton frei (für iPhone/Android nötig)
+  document.body.onclick = document.body.ontouchstart = function first(){
+    a.play(); a.pause(); a.currentTime=0;
+    document.body.onclick = document.body.ontouchstart = null;
+  };
+
+  // Danach: jedes Tippen = 2× schnell hintereinander
+  document.querySelector('button').onclick = function(){
+    a.currentTime=0; a.play();
+    setTimeout(()=>{a.currentTime=0; a.play();}, 400);
+  };
+</script>
+
+</body>
+</html>
